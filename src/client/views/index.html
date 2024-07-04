@@ -7,7 +7,7 @@
     <title>Travel Planner</title>
 </head>
 
-<body>   
+<body>
     <div id="overlay">
         <div class="loader" style="display: none;"></div>
     </div>
@@ -235,7 +235,7 @@
                                             <div class="right">
                                                 <p>in 32 days</p>
                                                 <div class="destination-weather-data"></div>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                     </section>
                                     <section id="destinations-loader" class="state">
@@ -376,5 +376,15 @@
         </footer>
     </div>
 </body>
-
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js').catch(error => {
+                console.error('ServiceWorker registration failed: ', error);
+            });
+        });
+    } else {
+        console.warn('Service workers are not supported.');
+    }
+</script>
 </html>
