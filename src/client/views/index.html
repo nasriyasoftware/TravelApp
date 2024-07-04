@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner</title>
+</head>
+
+<body>   
+    <div id="overlay">
+        <div class="loader" style="display: none;"></div>
+    </div>
+    <div id="mainContent" style="display: none;">
+        <header>
+            <div class="pageContent">
+                <div id="header-left">
+                    <a href="/">
+                        <img class="logo" src="/media/logo.png" alt="Nasriay Software Logo">
+                    </a>
+                    <hr>
+                    <h1>Travel Planner</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li id="authBtn">Login / Signup</li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <div class="pageContent">
+                <div id="app">
+                    <section id="loader" class="state" active>
+                        <div class="loader"></div>
+                        <p id="appLoaderMsg" hidden></p>
+                    </section>
+
+                    <section id="records" class="state">
+                        <div class="section-header">
+                            <h3 class="section-title">My Travel Plans</h3>
+                            <button id="open-createPlanState" class="iconBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                    <path d="M6,8H0V6H6V0H8V6h6V8H8v6H6Z" />
+                                </svg>
+                                Create Plan
+                            </button>
+                        </div>
+                        <hr>
+                        <div id="records-states" class="center-content-flex" flex-direction=column>
+                            <section id="no-records-state" class="state" active>
+                                <div class="center-content-flex" flex-direction="column">
+                                    <h3>No Plans Yet</h3>
+                                    <p>Start by creating a new plan</p>
+                                </div>
+                            </section>
+                            <section id="records-results-state" class="state">
+                                <div id="records-repeater"></div>
+                            </section>
+                        </div>
+                    </section>
+
+                    <section id="create-new-plan" class="state">
+                        <div class="section-header">
+                            <h3 class="section-title">Create New Travel Plan</h3>
+                            <button id="cancelCreatingPlan" class="outlined">Cancel</button>
+                        </div>
+                        <hr>
+                        <div class="form">
+                            <div class="input-container">
+                                <label for="create-plan-name-input">Plan Name</label>
+                                <input type="text" id="create-plan-name-input" placeholder="Enter your plan title">
+                                <div id="create-plan-name-input_err_msg" class="validation-error" hidden>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
+                                        <path
+                                            d="M360,560c11.3,0,20.8-3.8,28.5-11.5S400,531.3,400,520c0-11.3-3.8-20.8-11.5-28.5S371.3,480,360,480
+                                        s-20.8,3.8-28.5,11.5S320,508.7,320,520c0,11.3,3.8,20.8,11.5,28.5S348.7,560,360,560z M320,400h80V160h-80V400z M210,720L0,510
+                                        V210L210,0h300l210,210v300L510,720H210z M244,640h232l164-164V244L476,80H244L80,244v232L244,640z" />
+                                    </svg>
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-content-center align-items-start gap-1">
+                                <div class="input-container">
+                                    <label for="plan-startDate-input">Leaving Date</label>
+                                    <input type="date" id="plan-startDate-input" placeholder="Enter the starting date">
+                                    <div id="plan-startDate-input_err_msg" class="validation-error" hidden>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
+                                            <path
+                                                d="M360,560c11.3,0,20.8-3.8,28.5-11.5S400,531.3,400,520c0-11.3-3.8-20.8-11.5-28.5S371.3,480,360,480
+                                            s-20.8,3.8-28.5,11.5S320,508.7,320,520c0,11.3,3.8,20.8,11.5,28.5S348.7,560,360,560z M320,400h80V160h-80V400z M210,720L0,510
+                                            V210L210,0h300l210,210v300L510,720H210z M244,640h232l164-164V244L476,80H244L80,244v232L244,640z" />
+                                        </svg>
+                                        <p></p>
+                                    </div>
+                                </div>
+
+                                <div class="input-container">
+                                    <label for="plan-endDate-input">Returning Date</label>
+                                    <input type="date" id="plan-endDate-input" placeholder="Enter the ending date"
+                                        disabled>
+                                    <div id="plan-endDate-input_err_msg" class="validation-error" hidden>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
+                                            <path
+                                                d="M360,560c11.3,0,20.8-3.8,28.5-11.5S400,531.3,400,520c0-11.3-3.8-20.8-11.5-28.5S371.3,480,360,480
+                                            s-20.8,3.8-28.5,11.5S320,508.7,320,520c0,11.3,3.8,20.8,11.5,28.5S348.7,560,360,560z M320,400h80V160h-80V400z M210,720L0,510
+                                            V210L210,0h300l210,210v300L510,720H210z M244,640h232l164-164V244L476,80H244L80,244v232L244,640z" />
+                                        </svg>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="createPlan" class="iconBtn" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                    <path d="M6,8H0V6H6V0H8V6h6V8H8v6H6Z" />
+                                </svg>
+                                Create
+                            </button>
+                        </div>
+                    </section>
+
+                    <section id="plan-item" class="state">
+                        <div id="plan-item-heading" class="section-header">
+                            <h3 class="section-title" id="plan-item-title">My Plan Title</h3>
+                            <div class="section-header">
+                                <button id="delete-plan" class="iconBtn tone-danger">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 18">
+                                        <path
+                                            d="M5.4,13.5,8,10.9l2.6,2.6L12,12.1,9.4,9.5,12,6.9,10.6,5.5,8,8.1,5.4,5.5,4,6.9,6.6,9.5,4,12.1ZM3,18a1.93,1.93,0,0,1-1.41-.59A1.93,1.93,0,0,1,1,16V3H0V1H5V0h6V1h5V3H15V16a2,2,0,0,1-2,2ZM13,3H3V16H13ZM3,3V3Z" />
+                                    </svg>
+                                    <p>Remove Trip</p>
+                                </button>
+                                <button id="backToRecordsFromPlanItem">Back</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <section class="plan-item-main">
+                            <img id="plan-item-img" src="https://picsum.photos/1600/900" alt="">
+                            <div class="plan-item-summary">
+                                <div class="input-container edit-icon">
+                                    <div class="only-input">
+                                        <input type="text" id="selected-plan-name-input" id="plan-item-title-input"
+                                            placeholder="Enter your plan title" readonly>
+                                        <div class="icon-container" id="edit-plan-title-icon" active>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 511">
+                                                <path
+                                                    d="M405.332 256.484c-11.797 0-21.332 9.559-21.332 21.332v170.668c0 11.754-9.559 21.332-21.332 21.332H64c-11.777 0-21.332-9.578-21.332-21.332V149.816c0-11.754 9.555-21.332 21.332-21.332h170.668c11.797 0 21.332-9.558 21.332-21.332 0-11.777-9.535-21.336-21.332-21.336H64c-35.285 0-64 28.715-64 64v298.668c0 35.286 28.715 64 64 64h298.668c35.285 0 64-28.714 64-64V277.816c0-11.796-9.54-21.332-21.336-21.332zm0 0">
+                                                </path>
+                                                <path
+                                                    d="M200.02 237.05a10.793 10.793 0 0 0-2.922 5.438l-15.082 75.438c-.703 3.496.406 7.101 2.922 9.64a10.673 10.673 0 0 0 7.554 3.114c.68 0 1.387-.063 2.09-.211l75.414-15.082c2.09-.43 3.988-1.43 5.461-2.926l168.79-168.79-75.415-75.41zM496.383 16.102c-20.797-20.801-54.633-20.801-75.414 0l-29.524 29.523 75.414 75.414 29.524-29.527C506.453 81.465 512 68.066 512 53.816s-5.547-27.648-15.617-37.714zm0 0">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <!-- Error Msg -->
+                                    <div id="selected-plan-name-input_err_msg" class="validation-error" hidden>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
+                                            <path
+                                                d="M360,560c11.3,0,20.8-3.8,28.5-11.5S400,531.3,400,520c0-11.3-3.8-20.8-11.5-28.5S371.3,480,360,480
+                                            s-20.8,3.8-28.5,11.5S320,508.7,320,520c0,11.3,3.8,20.8,11.5,28.5S348.7,560,360,560z M320,400h80V160h-80V400z M210,720L0,510
+                                            V210L210,0h300l210,210v300L510,720H210z M244,640h232l164-164V244L476,80H244L80,244v232L244,640z" />
+                                        </svg>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="timings">
+                                    <p id="plan-item-startDate">Starting on: June 26th, 2024</p>
+                                    <p id="plan-item-endDate">Ending on: June 30th, 2024</p>
+                                </div>
+                                <hr>
+                                <div class="metrics">
+                                    <div class="metric" id="selected-plan-metric-item-destinations">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20">
+                                            <path
+                                                d="M8,10a2,2,0,0,0,2-2A2,2,0,0,0,8,6,2,2,0,0,0,6,8a2,2,0,0,0,2,2Zm0,7.35a27.9,27.9,0,0,0,4.53-5.09A7.77,7.77,0,0,0,14,8.2a6,6,0,0,0-1.74-4.46A5.79,5.79,0,0,0,8,2,5.79,5.79,0,0,0,3.74,3.74,6,6,0,0,0,2,8.2a7.71,7.71,0,0,0,1.48,4.06A27.42,27.42,0,0,0,8,17.35ZM8,20a33,33,0,0,1-6-6.36A9.86,9.86,0,0,1,0,8.2a7.71,7.71,0,0,1,2.41-6A8,8,0,0,1,8,0a8,8,0,0,1,5.59,2.23A7.71,7.71,0,0,1,16,8.2a9.86,9.86,0,0,1-2,5.44A33,33,0,0,1,8,20Z" />
+                                        </svg>
+                                        <p class="metric-label">Destinations</p>
+                                        <p id="selected-plan-destinations-number">0</p>
+                                    </div>
+                                    <div class="metric" id="selected-plan-metric-item-flights">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.43 17.4">
+                                            <path
+                                                d="M3.55,13.85.35,12.1l1-1,2.5.35L7.8,7.5,0,3.25l1.4-1.4L11,4.3,14.88.43A1.4,1.4,0,0,1,15.94,0,1.42,1.42,0,0,1,17,.43a1.44,1.44,0,0,1,.43,1.06A1.46,1.46,0,0,1,17,2.55l-3.9,3.9L15.55,16l-1.4,1.4L9.9,9.6,6,13.5,6.35,16l-1,1.05Z" />
+                                        </svg>
+                                        <p class="metric-label">Flights</p>
+                                        <p id="selected-plan-flights-number">0</p>
+                                    </div>
+                                    <div class="metric" id="selected-plan-metric-item-hotels">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 15">
+                                            <path
+                                                d="M0,15V0H2V10h8V2h8a3.85,3.85,0,0,1,2.83,1.18A3.84,3.84,0,0,1,22,6v9H20V12H2v3ZM6,9a2.89,2.89,0,0,1-2.12-.87A2.9,2.9,0,0,1,3,6a2.86,2.86,0,0,1,.88-2.12A2.86,2.86,0,0,1,6,3a2.9,2.9,0,0,1,2.13.88A2.89,2.89,0,0,1,9,6,3,3,0,0,1,6,9Zm6,1h8V6a2,2,0,0,0-2-2H12ZM6,7a1,1,0,1,0-.71-.29A1,1,0,0,0,6,7Zm6-3V4Z" />
+                                        </svg>
+                                        <p class="metric-label">Hotel Reservations</p>
+                                        <p id="selected-plan-hotels-number">0</p>
+                                    </div>
+                                    <div class="metric" id="selected-plan-metric-item-todos">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640">
+                                            <path
+                                                d="M0,640V480H160V640Zm240,0V480H800V640ZM0,400V240H160V400Zm240,0V240H800V400ZM0,160V0H160V160Zm240,0V0H800V160Z" />
+                                        </svg>
+                                        <p class="metric-label">Todo Tasks</p>
+                                        <p id="selected-plan-todos-number">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="plan-details-container">
+                            <section class="plan-data-section" id="destinations">
+                                <div class="section-header">
+                                    <h3 class="section-title" id="plan-item-title">Destinations</h3>
+                                    <button id="destinations-action-btn" class="action-btn">Add Destination</button>
+                                </div>
+
+                                <hr>
+                                <div id="selected-plan-destinations-box" class="stateBox">
+                                    <section id="no-destinations-state" class="state empty-state" active>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20">
+                                            <path
+                                                d="M8,10a2,2,0,0,0,2-2A2,2,0,0,0,8,6,2,2,0,0,0,6,8a2,2,0,0,0,2,2Zm0,7.35a27.9,27.9,0,0,0,4.53-5.09A7.77,7.77,0,0,0,14,8.2a6,6,0,0,0-1.74-4.46A5.79,5.79,0,0,0,8,2,5.79,5.79,0,0,0,3.74,3.74,6,6,0,0,0,2,8.2a7.71,7.71,0,0,0,1.48,4.06A27.42,27.42,0,0,0,8,17.35ZM8,20a33,33,0,0,1-6-6.36A9.86,9.86,0,0,1,0,8.2a7.71,7.71,0,0,1,2.41-6A8,8,0,0,1,8,0a8,8,0,0,1,5.59,2.23A7.71,7.71,0,0,1,16,8.2a9.86,9.86,0,0,1-2,5.44A33,33,0,0,1,8,20Z" />
+                                        </svg>
+                                        <h3>No Destinations</h3>
+                                        <p>Start by adding a destination for your trip</p>
+                                    </section>
+                                    <section id="all-destination-state" class="state">
+                                        <div class="destination-item" item-id="654654654">
+                                            <div class="left">
+                                                <div class="remove-destination"></div>
+                                                <p class="destination-name">Jerusalem</p>
+                                            </div>
+                                            <div class="right">
+                                                <p>in 32 days</p>
+                                                <div class="destination-weather-data"></div>
+                                            </div>                                            
+                                        </div>
+                                    </section>
+                                    <section id="destinations-loader" class="state">
+                                        <div class="loader"></div>
+                                    </section>
+                                </div>
+                            </section>
+
+                            <section class="plan-data-section" id="flights">
+                                <div class="section-header">
+                                    <h3 class="section-title" id="plan-item-title">Flights</h3>
+                                    <button id="flights-action-btn" class="action-btn">Add Flight</button>
+                                </div>
+
+                                <hr>
+                                <div id="selected-plan-flights-box" class="stateBox">
+                                    <section id="no-flights-state" class="state empty-state" active>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.43 17.4">
+                                            <path
+                                                d="M3.55,13.85.35,12.1l1-1,2.5.35L7.8,7.5,0,3.25l1.4-1.4L11,4.3,14.88.43A1.4,1.4,0,0,1,15.94,0,1.42,1.42,0,0,1,17,.43a1.44,1.44,0,0,1,.43,1.06A1.46,1.46,0,0,1,17,2.55l-3.9,3.9L15.55,16l-1.4,1.4L9.9,9.6,6,13.5,6.35,16l-1,1.05Z" />
+                                        </svg>
+                                        <h3>No Flights</h3>
+                                        <p>Start by adding a flgihts for your trip</p>
+                                    </section>
+                                    <section id="all-flights-state" class="state">
+
+                                    </section>
+                                    <section id="flights-loader" class="state">
+                                        <div class="loader"></div>
+                                    </section>
+                                </div>
+
+
+                            </section>
+
+                            <section class="plan-data-section" id="hotels">
+                                <div class="section-header">
+                                    <h3 class="section-title" id="plan-item-title">Hotels</h3>
+                                    <button id="hotels-action-btn" class="action-btn">Add Reservation</button>
+                                </div>
+
+                                <hr>
+                                <div id="selected-plan-hotel-box" class="stateBox">
+                                    <section id="no-hotels-state" class="state empty-state" active>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 15">
+                                            <path
+                                                d="M0,15V0H2V10h8V2h8a3.85,3.85,0,0,1,2.83,1.18A3.84,3.84,0,0,1,22,6v9H20V12H2v3ZM6,9a2.89,2.89,0,0,1-2.12-.87A2.9,2.9,0,0,1,3,6a2.86,2.86,0,0,1,.88-2.12A2.86,2.86,0,0,1,6,3a2.9,2.9,0,0,1,2.13.88A2.89,2.89,0,0,1,9,6,3,3,0,0,1,6,9Zm6,1h8V6a2,2,0,0,0-2-2H12ZM6,7a1,1,0,1,0-.71-.29A1,1,0,0,0,6,7Zm6-3V4Z" />
+                                        </svg>
+                                        <h3>No Hotel Reservations</h3>
+                                        <p>Start by adding a hotel reservations for your trip</p>
+                                    </section>
+                                    <section id="all-hotels-state" class="state">
+
+                                    </section>
+                                    <section id="flights-loader" class="state">
+                                        <div class="loader"></div>
+                                    </section>
+                                </div>
+
+
+                            </section>
+
+                            <section class="plan-data-section" id="todos">
+                                <div class="section-header">
+                                    <h3 class="section-title" id="plan-item-title">Todo List</h3>
+                                    <button id="todos-action-btn" class="action-btn">Add Task</button>
+                                </div>
+
+                                <hr>
+                                <div id="selected-todos-states-box" class="stateBox">
+                                    <section id="no-todos-state" class="state empty-state" active>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640">
+                                            <path
+                                                d="M0,640V480H160V640Zm240,0V480H800V640ZM0,400V240H160V400Zm240,0V240H800V400ZM0,160V0H160V160Zm240,0V0H800V160Z" />
+                                        </svg>
+                                        <h3>No Tasks Yet</h3>
+                                        <p>Start by adding a task to your trip</p>
+                                    </section>
+                                    <section id="all-todos-state" class="state">
+
+                                    </section>
+                                    <section id="todos-loader" class="state">
+                                        <div class="loader"></div>
+                                    </section>
+                                </div>
+                            </section>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="pageContent">
+                <p class="copyrights-notice">2019-2024 © Nasriya Software, LLC.</p>
+                <div class="social-nav">
+                    <a href="https://www.linkedin.com/in/ahmadnasriya" target="_blank">
+                        <div class="social-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                class="">
+                                <g>
+                                    <path
+                                        d="M256 0C114.637 0 0 114.637 0 256s114.637 256 256 256 256-114.637 256-256S397.363 0 256 0zm-74.39 387h-62.348V199.426h62.347zm-31.173-213.188h-.406c-20.922 0-34.453-14.402-34.453-32.402 0-18.406 13.945-32.41 35.274-32.41 21.328 0 34.453 14.004 34.859 32.41 0 18-13.531 32.403-35.274 32.403zM406.423 387h-62.34V286.652c0-25.218-9.027-42.418-31.586-42.418-17.223 0-27.48 11.602-31.988 22.801-1.649 4.008-2.051 9.61-2.051 15.215V387h-62.344s.817-169.977 0-187.574h62.344v26.558c8.285-12.78 23.11-30.96 56.188-30.96 41.02 0 71.777 26.808 71.777 84.421zm0 0"
+                                        opacity="1" data-original="#000000" class=""></path>
+                                </g>
+                            </svg>
+                            <p>Connect on LinkedIn</p>
+                        </div>
+                    </a>
+                    <div class="social-diver">•</div>
+                    <a href="https://github.com/nasriyasoftware/" target="_blank">
+                        <div class="social-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            <p>Follow on Github</p>
+                        </div>
+                    </a>
+                    <div class="social-diver">•</div>
+                    <a href="https://telegram.me/devops222" target="_blank">
+                        <div class="social-btn">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+                                xmlns:serif="http://www.serif.com/"
+                                style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+                                <path id="telegram-1"
+                                    d="M18.384,22.779c0.322,0.228 0.737,0.285 1.107,0.145c0.37,-0.141 0.642,-0.457 0.724,-0.84c0.869,-4.084 2.977,-14.421 3.768,-18.136c0.06,-0.28 -0.04,-0.571 -0.26,-0.758c-0.22,-0.187 -0.525,-0.241 -0.797,-0.14c-4.193,1.552 -17.106,6.397 -22.384,8.35c-0.335,0.124 -0.553,0.446 -0.542,0.799c0.012,0.354 0.25,0.661 0.593,0.764c2.367,0.708 5.474,1.693 5.474,1.693c0,0 1.452,4.385 2.209,6.615c0.095,0.28 0.314,0.5 0.603,0.576c0.288,0.075 0.596,-0.004 0.811,-0.207c1.216,-1.148 3.096,-2.923 3.096,-2.923c0,0 3.572,2.619 5.598,4.062Zm-11.01,-8.677l1.679,5.538l0.373,-3.507c0,0 6.487,-5.851 10.185,-9.186c0.108,-0.098 0.123,-0.262 0.033,-0.377c-0.089,-0.115 -0.253,-0.142 -0.376,-0.064c-4.286,2.737 -11.894,7.596 -11.894,7.596Z" />
+                            </svg>
+                            <p>Connect on Telegram</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
