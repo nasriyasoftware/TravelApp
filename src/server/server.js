@@ -32,6 +32,6 @@ app.get('/api/v1/images', pixabay.handlers.v1);
 app.get('/api/v1/locations', locations.handlers.v1);
 app.get('/api/v1/weather', weatherbit.handlers.v1);
 
-app.listen(PORT, () => console.info(`Server is listening on port #${PORT}`));
+const server = app.listen(PORT, () => console.info(`Server is listening on port #${PORT}`));
 
-export default app;
+export default server;

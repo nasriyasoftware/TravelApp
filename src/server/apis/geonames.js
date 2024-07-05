@@ -1,4 +1,4 @@
-import nodeFetch from 'node-fetch';
+import axios from "axios";
 
 class Geonames {
     #_Base_URL = 'http://api.geonames.org/searchJSON';
@@ -12,12 +12,11 @@ class Geonames {
     async search(city) {
         try {
             if (typeof city !== 'string') { throw new Error(`The city name must be a string value, instead got ${typeof city}`) }
-            const url = `${this.#_Base_URL}?q=${encodeURIComponent(city)}&username=${this.#_API_Username}&lang=en&featureClass=P`;
 
-            const httpRes = await nodeFetch(url);
+            const httpRes = await axios.get(`${this.#_Base_URL}?q=${encodeURIComponent(city)}&username=${this.#_API_Username}&lang=en&featureClass=P`);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
-            return httpRes.json();
+            return httpRes.data;
         } catch (error) {
             if (error instanceof Error) { error.message = `Geonames API (search) Error: ${error.message}` }
             return Promise.reject(error);

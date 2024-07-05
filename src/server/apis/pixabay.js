@@ -1,5 +1,5 @@
 import express from 'express';
-import nodeFetch from 'node-fetch';
+import axios from "axios";
 
 class Pixabay {
     #_Base_Url = 'https://pixabay.com/api/';
@@ -16,10 +16,10 @@ class Pixabay {
             if (typeof searchTerm !== 'string') { throw new TypeError(`The "searchTerm" can only be string, instead got ${typeof searchTerm}`) }
             if (searchTerm.length > 100) { throw new RangeError(`The "searchTerm" cannot be longer than 100 characters`) }
 
-            const httpRes = await nodeFetch(`${this.#_Base_Url}?key=${this.#_API_Key}&q=${encodeURIComponent(searchTerm)}`);
+            const httpRes = await axios.get(`${this.#_Base_Url}?key=${this.#_API_Key}&q=${encodeURIComponent(searchTerm)}`);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
-            return httpRes.json();
+            return httpRes.data;
         } catch (error) {
             if (error instanceof Error) { error.message = `Pixabay API (searchImages) Error: ${error.message}` }
             return Promise.reject(error);
@@ -37,10 +37,10 @@ class Pixabay {
             if (typeof searchTerm !== 'string') { throw new TypeError(`The "searchTerm" can only be string, instead got ${typeof searchTerm}`) }
             if (searchTerm.length > 100) { throw new RangeError(`The "searchTerm" cannot be longer than 100 characters`) }
 
-            const httpRes = await nodeFetch(`${this.#_Base_Url}/videos?key=${this.#_API_Key}&q=${encodeURIComponent(searchTerm)}`);
+            const httpRes = await axios.get(`${this.#_Base_Url}/videos?key=${this.#_API_Key}&q=${encodeURIComponent(searchTerm)}`);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
-            return httpRes.json();
+            return httpRes.data;
         } catch (error) {
             if (error instanceof Error) { error.message = `Pixabay API (searchVideos) Error: ${error.message}` }
             return Promise.reject(error);

@@ -1,5 +1,5 @@
 import express from 'express';
-import nodeFetch from 'node-fetch';
+import axios from "axios";
 
 class Weatherbit {
     #_API_Key = process.env.WEATHERBIT_API_KEY;
@@ -34,10 +34,10 @@ class Weatherbit {
             const unit = system[0];
             const url = `${this.#_Base_URL.current}?lat=${coordinates.lat}&lon=${coordinates.lon}&units=${unit}&key=${this.#_API_Key}`;
 
-            const httpRes = await nodeFetch(url);
+            const httpRes = await axios.get(url);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
-            return httpRes.json();
+            return httpRes.data;
         } catch (error) {
             if (error instanceof Error) { error.message = `Weatherbit API (current) Error: ${error.message}` }
             return Promise.reject(error);
@@ -120,11 +120,10 @@ class Weatherbit {
             url += `&key=${this.#_API_Key}`;
 
             // Send the request
-            const httpRes = await nodeFetch(url);
-            const response = await httpRes.json();
+            const httpRes = await axios.get(url);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
-            return response;
+            return httpRes.data;
         } catch (error) {
             if (error instanceof Error) { error.message = `Weatherbit API (future) Error: ${error.message}` }
             return Promise.reject(error);
