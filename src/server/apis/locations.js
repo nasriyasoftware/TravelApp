@@ -1,6 +1,7 @@
 import fs from 'fs';
 import geonames from './geonames.js';
 const countries = JSON.parse(fs.readFileSync('src/server/assets/countries.json', { encoding: 'utf-8' }));
+import nodeFetch from 'node-fetch';
 
 class LocationsManager {
     #_cities_base_url = 'https://api.teleport.org/api/cities';
@@ -38,7 +39,7 @@ class LocationsManager {
             try {
                 const url = `${this.#_cities_base_url}/search=${encodeURIComponent(term)}`;
                 console.log(url);
-                const httpRes = await fetch(url);
+                const httpRes = await nodeFetch(url);
                 if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
                 const data = await httpRes.json();

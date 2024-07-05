@@ -1,4 +1,5 @@
 import express from 'express';
+import nodeFetch from 'node-fetch';
 
 class Pixabay {
     #_Base_Url = 'https://pixabay.com/api/';
@@ -15,7 +16,7 @@ class Pixabay {
             if (typeof searchTerm !== 'string') { throw new TypeError(`The "searchTerm" can only be string, instead got ${typeof searchTerm}`) }
             if (searchTerm.length > 100) { throw new RangeError(`The "searchTerm" cannot be longer than 100 characters`) }
 
-            const httpRes = await fetch(`${this.#_Base_Url}?key=${this.#_API_Key}&q=${encodeURIComponent(searchTerm)}`);
+            const httpRes = await nodeFetch(`${this.#_Base_Url}?key=${this.#_API_Key}&q=${encodeURIComponent(searchTerm)}`);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
             return httpRes.json();
@@ -36,7 +37,7 @@ class Pixabay {
             if (typeof searchTerm !== 'string') { throw new TypeError(`The "searchTerm" can only be string, instead got ${typeof searchTerm}`) }
             if (searchTerm.length > 100) { throw new RangeError(`The "searchTerm" cannot be longer than 100 characters`) }
 
-            const httpRes = await fetch(`${this.#_Base_Url}/videos?key=${this.#_API_Key}&q=${encodeURIComponent(searchTerm)}`);
+            const httpRes = await nodeFetch(`${this.#_Base_Url}/videos?key=${this.#_API_Key}&q=${encodeURIComponent(searchTerm)}`);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
             return httpRes.json();

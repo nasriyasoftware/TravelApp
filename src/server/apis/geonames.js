@@ -1,3 +1,4 @@
+import nodeFetch from 'node-fetch';
 
 class Geonames {
     #_Base_URL = 'http://api.geonames.org/searchJSON';
@@ -13,7 +14,7 @@ class Geonames {
             if (typeof city !== 'string') { throw new Error(`The city name must be a string value, instead got ${typeof city}`) }
             const url = `${this.#_Base_URL}?q=${encodeURIComponent(city)}&username=${this.#_API_Username}&lang=en&featureClass=P`;
 
-            const httpRes = await fetch(url);
+            const httpRes = await nodeFetch(url);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
             return httpRes.json();

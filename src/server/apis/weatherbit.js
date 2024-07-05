@@ -1,4 +1,5 @@
 import express from 'express';
+import nodeFetch from 'node-fetch';
 
 class Weatherbit {
     #_API_Key = process.env.WEATHERBIT_API_KEY;
@@ -33,7 +34,7 @@ class Weatherbit {
             const unit = system[0];
             const url = `${this.#_Base_URL.current}?lat=${coordinates.lat}&lon=${coordinates.lon}&units=${unit}&key=${this.#_API_Key}`;
 
-            const httpRes = await fetch(url);
+            const httpRes = await nodeFetch(url);
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
             return httpRes.json();
@@ -119,7 +120,7 @@ class Weatherbit {
             url += `&key=${this.#_API_Key}`;
 
             // Send the request
-            const httpRes = await fetch(url);
+            const httpRes = await nodeFetch(url);
             const response = await httpRes.json();
             if (httpRes.status !== 200) { throw new Error(`Unexpected API response recieved. The API responded with a status of (${httpRes.status})`) }
 
