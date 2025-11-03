@@ -28,8 +28,8 @@ The Travel Planner project is part of the Udacity Frontend Web Developer Nanodeg
 ### Installation
 1. **Clone the repository:** To clone the project, just run this command in your terminal:
 ```powershell
-git clone https://github.com/nasriyasoftware/TravelApp.git
-cd .\TravelApp\
+git clone https://github.com/nasriyasoftware/Udacity_FEND_TravelApp.git
+cd .\Udacity_FEND_TravelApp\
 ```
 
 2. **Install dependencies** using `npm install`.
